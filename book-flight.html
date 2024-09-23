@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Laurel Airways</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book-flight.html">Book Flight</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="booking-section">
+        <h2>Book Your Flight</h2>
+        <form id="booking-form">
+            <div class="form-group">
+                <label for="from">From:</label>
+                <input type="text" id="from" name="from" placeholder="Departure city" required>
+            </div>
+            <div class="form-group">
+                <label for="to">To:</label>
+                <input type="text" id="to" name="to" placeholder="Destination city" required>
+            </div>
+            <div class="form-group">
+                <label for="departure-date">Departure Date:</label>
+                <input type="date" id="departure-date" name="departure-date" required>
+            </div>
+            <div class="form-group">
+                <label for="return-date">Return Date:</label>
+                <input type="date" id="return-date" name="return-date">
+            </div>
+            <div class="form-group">
+                <label for="passengers">Passengers:</label>
+                <input type="number" id="passengers" name="passengers" min="1" value="1" required>
+            </div>
+            <button type="submit" class="btn">Book Flights</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 12A COE . All rights reserved.</p>
+    </footer>
+
+    <script>
+        const bookingForm = document.getElementById('booking-form');
+        let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+        bookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(bookingForm);
+            const bookingEntry = {
+                from: formData.get('from'),
+                to: formData.get('to'),
+                departureDate: formData.get('departure-date'),
+                returnDate: formData.get('return-date'),
+                passengers: formData.get('passengers')
+            };
+            bookings.push(bookingEntry);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            bookingForm.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Simple styling for the form */
+        .contact-form {
+            margin: 20px auto;
+            width: 50%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea, .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .contact-form button {
+            background-color: #004c8c;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        .contact-form button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Laurel Airways</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book-flight.html">Book Flight</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:info@airlinebooking.com">info@laurelhigh.org</a></p>
+        <p>Phone: +91-91540 42671</p>
+        <p>Address: Laurel High Global School, Airport Road, Gadala, Rajamahendravaram – 533102</p>
+    </section>
+
+    <!-- Compose Mail Form -->
+    <section class="contact-section">
+        <h2>Compose Mail</h2>
+        <form class="contact-form" id="composeMailForm">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+            <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+            <button type="submit">Send Mail</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 12A COE . All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('composeMailForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Compose mailto link
+            const mailtoLink = `mailto:info@laurelhigh.org?subject=${encodeURIComponent(subject)}&body=From: ${encodeURIComponent(name)} (${encodeURIComponent(email)})%0D%0A%0D%0A${encodeURIComponent(message)}`;
+
+            // Open mailto link in the user's email client
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</
