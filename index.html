@@ -11,20 +11,7 @@
             background: url('https://wallpapers.com/images/featured/aeroplane-q98atcz0voqbdkv1.jpg') no-repeat center center/cover;
             margin: 0;
             padding: 0;
-            color: #fff;
-            position: relative;
-        }
-
-        /* Gradient Overlay */
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            color: #333;
         }
 
         header {
@@ -32,15 +19,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: rgba(0, 37, 77, 0.9);
-            z-index: 2;
+            background-color: #00254d;
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin: 0;
-            color: #ffd700;
-            letter-spacing: 1px;
+            color: white;
         }
 
         nav ul {
@@ -55,19 +40,19 @@
         }
 
         nav ul li a {
-            padding: 10px 15px;
+            padding: 10px 20px;
             color: #fff;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1em;
+            font-weight: bold;
+            font-size: 1.2em;
             position: relative;
             display: inline-block;
             transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
         }
 
         nav ul li a:hover {
-            background-color: rgba(255, 215, 0, 0.8);
-            color: #00254d;
+            background-color: rgba(0, 86, 179, 1);
+            color: #ffd700;
             transform: scale(1.1);
         }
 
@@ -76,21 +61,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: calc(100vh - 120px); /* Adjust for header and footer height */
+            height: 100vh;
             text-align: center;
             padding: 20px;
-            z-index: 2;
         }
 
         h2 {
             margin: 0 0 20px;
-            font-size: 2em;
         }
 
         p {
             margin: 0 0 40px;
             font-size: 1.2em;
-            max-width: 600px;
         }
 
         .book-flight-btn {
@@ -102,8 +84,6 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .book-flight-btn:hover {
@@ -111,17 +91,6 @@
             transform: scale(1.1);
         }
 
-        footer {
-            padding: 10px;
-            font-size: 0.9em;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 1);
-            position: relative;
-            width: 100%;
-            z-index: 2;
-        }
-
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -144,14 +113,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             width: 300px;
             text-align: left;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.3s ease;
-        }
-
-        .modal.show .modal-content {
-            opacity: 1;
-            transform: scale(1);
         }
 
         .close {
@@ -166,6 +127,15 @@
         .close:focus {
             color: black;
             text-decoration: none;
+        }
+
+        footer {
+            padding: 10px;
+            font-size: 0.9em;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 1);
+            position: relative;
+            width: 100%;
         }
     </style>
 </head>
@@ -227,9 +197,6 @@
             if (e.target.id === 'openLogin') {
                 e.preventDefault();
                 loginModal.style.display = 'flex';
-                setTimeout(() => {
-                    loginModal.classList.add('show');
-                }, 10);
             } else if (e.target.id === 'logout') {
                 // Logout functionality
                 localStorage.removeItem('loggedInUser');
@@ -239,10 +206,7 @@
         });
 
         closeModal.addEventListener('click', () => {
-            loginModal.classList.remove('show');
-            setTimeout(() => {
-                loginModal.style.display = 'none';
-            }, 300);
+            loginModal.style.display = 'none';
         });
 
         loginForm.addEventListener('submit', (e) => {
