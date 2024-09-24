@@ -51,9 +51,9 @@
             transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
         }
 
-        /* Hover effect for all nav links */
+        /* Hover effect for all nav links with transparency */
         nav ul li a:hover {
-            background-color: #0056b3; /* Change background on hover */
+            background-color: rgba(0, 86, 179, 0.7); /* Semi-transparent background on hover */
             color: #ffd700; /* Change text color on hover */
             transform: scale(1.1); /* Slight zoom on hover */
         }
@@ -108,10 +108,10 @@
             overflow: hidden;
         }
 
-        /* Button hover effect */
+        /* Button hover effect with transparency */
         .book-flight-btn:hover {
-            background-color: #0056b3;
-            transform: scale(0.8); /* Slight zoom on hover */
+            background-color: rgba(0, 86, 179, 0.7); /* Semi-transparent background on hover */
+            transform: scale(1.1); /* Slight zoom on hover */
         }
 
         /* Keyframe animation for hover effect */
@@ -281,29 +281,4 @@
                 }, 300);
                 updateLoginMenu();
                 alert(`Welcome, ${username}!`);
-            } else {
-                alert('Please enter valid login details.');
-            }
-        });
-
-        document.getElementById('loginMenu').addEventListener('click', (e) => {
-            if (e.target.id === 'logout') {
-                e.preventDefault();
-                localStorage.removeItem('loggedInUser');
-                loggedInUser = null;
-                updateLoginMenu();
-                alert('You have logged out successfully.');
-            }
-        });
-
-        window.onclick = function(event) {
-            if (event.target === loginModal) {
-                loginModal.classList.remove('show');
-                setTimeout(() => {
-                    loginModal.style.display = 'none';
-                }, 300);
-            }
-        };
-    </script>
-</body>
-</html>
+           
