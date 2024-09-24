@@ -6,7 +6,7 @@
     <title>Admin - View Bookings</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-     <audio autoplay loop>
+<audio autoplay loop>
     <source src="https://open.spotify.com/track/1tcWDBYQbJZVixZzsBWB0P?si=96caaa114f2c48f8" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
@@ -45,15 +45,34 @@
                 return;
             }
 
-            // Display bookings with Name field
+            // Display bookings with Name field and Delete button
             entriesDiv.innerHTML = '<h4>Bookings:</h4><ul>' +
-                bookings.map(booking => `<li>${booking.name}: ${booking.from} to ${booking.to} on ${booking.departureDate} (${booking.passengers} passengers)</li>`).join('') +
+                bookings.map((booking, index) => `
+                    <li>
+                        ${booking.name}: ${booking.from} to ${booking.to} on ${booking.departureDate} (${booking.passengers} passengers) 
+                        <button class="delete-btn" data-index="${index}">Delete</button>
+                    </li>`).join('') +
                 '</ul>';
+
+            // Attach delete event handlers
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    deleteBooking(index);
+                });
+            });
+        }
+
+        function deleteBooking(index) {
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            bookings.splice(index, 1); // Remove the booking at the given index
+            localStorage.setItem('bookings', JSON.stringify(bookings)); // Update localStorage
+            displayBookings(); // Refresh the displayed bookings
         }
 
         displayBookings();
 
-        // Download bookings as CSV, including the Name field
+        // Download bookings as CSV
         document.getElementById('download-csv').addEventListener('click', () => {
             const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
             const csvContent = "data:text/csv;charset=utf-8," 
