@@ -114,32 +114,6 @@
             transform: scale(1.1); /* Slight zoom on hover */
         }
 
-        /* Keyframe animation for hover effect */
-        @keyframes slideEffect {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-
-        /* Extra animation (line through the button on hover) */
-        .book-flight-btn:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            background: white;
-            left: -100%;
-            bottom: 0;
-            transition: all 0.3s ease;
-        }
-
-        .book-flight-btn:hover:after {
-            animation: slideEffect 0.5s forwards;
-        }
-
         /* Modal styling */
         .modal {
             display: none;
@@ -149,7 +123,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 1);
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
         .modal-content {
@@ -230,8 +204,6 @@
         <a href="book-flight.html" class="btn book-flight-btn">Book Flights</a>
     </section>
 
-    
-
     <script>
         const loginModal = document.getElementById('loginModal');
         const closeModal = document.querySelector('.close');
@@ -250,6 +222,7 @@
 
         updateLoginMenu();
 
+        // Event listener for the login button
         document.getElementById('openLogin')?.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.style.display = 'block';
@@ -279,4 +252,18 @@
                 }, 300);
                 updateLoginMenu();
                 alert(`Welcome, ${username}!`);
-           
+            }
+        });
+
+        // Logout functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'logout') {
+                localStorage.removeItem('loggedInUser');
+                loggedInUser = null;
+                updateLoginMenu();
+                alert('You have logged out.');
+            }
+        });
+    </script>
+</body>
+</html>
