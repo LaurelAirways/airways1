@@ -10,6 +10,82 @@ body {
     color: #333;
     background-color: #f4f4f4;
 }
+/* Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('https://cdn.prod.website-files.com/646a6ec3f634076bc7bf77f2/6504732212478432515994c0_united-airplane-desktop.jpeg') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Additional styling for the rest of the site */
+header {
+    background-color: rgba(0, 76, 140, 0.85);
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.site-title {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav-menu li {
+    margin: 0 15px;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-menu li a:hover {
+    color: #ffcc00;
+}
+
+.main-content {
+    text-align: center;
+    color: white;
+    padding: 80px 20px;
+}
+
+.book-flight-btn {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #004c8c;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.book-flight-btn:hover {
+    background-color: #003366;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #004c8c;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
 /* Header styling */
 header {
