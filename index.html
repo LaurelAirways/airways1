@@ -225,6 +225,52 @@
             position: relative;
             width: 100%;
         }
+
+        /* Chatbot styles */
+        #chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+        }
+
+        #chatbot-header {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            cursor: pointer;
+        }
+
+        #chatbot-body {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        #chatbot-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        #chatbot-send {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -261,6 +307,14 @@
         <p>Experience world-class travel with seamless flight booking, luxurious comfort, and exceptional service.</p>
         <a href="book-flight.html" class="btn book-flight-btn">Book Flights</a>
     </section>
+
+    <!-- Chatbot HTML -->
+    <div id="chatbot">
+        <div id="chatbot-header">Chatbot</div>
+        <div id="chatbot-body"></div>
+        <input type="text" id="chatbot-input" placeholder="Type a message...">
+        <button id="chatbot-send">Send</button>
+    </div>
 
     <script>
         const loginModal = document.getElementById('loginModal');
@@ -321,6 +375,36 @@
                 closeModal.click();
             }
         }
+
+        // Chatbot functionality
+        const greetings = [
+            "Hello! How can I assist you today?",
+            "Welcome back! What do you need help with?",
+            "Hi there! Ready to book your next flight?",
+            "Greetings! How can I help you?",
+            "Good to see you! What would you like to know?"
+        ];
+
+        function showGreeting() {
+            const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+            const chatbotBody = document.getElementById('chatbot-body');
+            chatbotBody.innerHTML += `<div>${randomGreeting}</div>`;
+            document.getElementById('chatbot').style.display = 'block';
+        }
+
+        document.getElementById('chatbot-send').addEventListener('click', () => {
+            const input = document.getElementById('chatbot-input').value;
+            const chatbotBody = document.getElementById('chatbot-body');
+            if (input) {
+                chatbotBody.innerHTML += `<div>You: ${input}</div>`;
+                document.getElementById('chatbot-input').value = '';
+                // Here you can add logic for chatbot response
+            }
+            chatbotBody.scrollTop = chatbotBody.scrollHeight; // Auto-scroll to the bottom
+        });
+
+        // Show greeting when the page loads
+        window.onload = showGreeting;
     </script>
 
     <footer>
