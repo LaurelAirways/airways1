@@ -280,12 +280,20 @@
 
         updateLoginMenu();
 
-        document.getElementById('openLogin')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'flex';
-            setTimeout(() => {
-                loginModal.classList.add('show');
-            }, 10);
+        // Open Login Modal
+        loginMenu.addEventListener('click', (e) => {
+            if (e.target.id === 'openLogin') {
+                e.preventDefault();
+                loginModal.style.display = 'flex';
+                setTimeout(() => {
+                    loginModal.classList.add('show');
+                }, 10);
+            } else if (e.target.id === 'logout') {
+                // Logout functionality
+                localStorage.removeItem('loggedInUser');
+                loggedInUser = null;
+                updateLoginMenu();
+            }
         });
 
         closeModal.addEventListener('click', () => {
@@ -305,15 +313,6 @@
                 loggedInUser = username;
                 updateLoginMenu();
                 closeModal.click();
-            }
-        });
-
-        // Logout functionality
-        loginMenu.addEventListener('click', (e) => {
-            if (e.target.id === 'logout') {
-                localStorage.removeItem('loggedInUser');
-                loggedInUser = null;
-                updateLoginMenu();
             }
         });
 
