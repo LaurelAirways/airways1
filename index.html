@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airline Booking System</title>
+    <title>Laurel Airways</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
-     <audio autoplay loop>
-    <source src="https://open.spotify.com/track/1tcWDBYQbJZVixZzsBWB0P?si=96caaa114f2c48f8" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 <body>
-    <!-- Header -->
     <header>
         <div class="logo">
+            <img src="https://www.transparentpng.com/download/aircraft/download-aircraft-png-10.png" alt="Laurel Airways Logo" class="logo-img">
             <h1>Laurel Airways</h1>
         </div>
         <nav>
@@ -24,29 +19,141 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="admin.html">Admin</a></li>
+                <li id="loginMenu"></li> <!-- Login Menu -->
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Fly with Us, Fly in Comfort</h2>
-            <p>Experience world-class travel with seamless flight booking, luxurious comfort, and exceptional service.</p>
-            <a href="book-flight.html" class="btn">Book Now</a>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="btn">Login</button>
+            </form>
         </div>
+    </div>
+
+    <section class="main-content">
+        <h2>Welcome to Laurel Airways</h2>
+        <p>Experience world-class travel with seamless flight booking, luxurious comfort, and exceptional service.</p>
     </section>
 
     <footer>
-        <p>&copy; 2024 12A COE . All rights reserved.</p>
+        <p>&copy; 2024 12A COE. All rights reserved.</p>
     </footer>
 
     <script>
-        // Optional: You can add JavaScript functionality for admin if needed
-        document.getElementById('admin-panel').addEventListener('click', function(event) {
-            event.preventDefault();
-            alert('Admin panel functionality is not implemented yet.');
+        // Get elements
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.querySelector('.close');
+        const loginMenu = document.getElementById('loginMenu');
+        const loginForm = document.getElementById('loginForm');
+        
+        // Check if user is logged in
+        let loggedInUser = localStorage.getItem('loggedInUser');
+
+        function updateLoginMenu() {
+            if (loggedInUser) {
+                loginMenu.innerHTML = `
+                    <a href="#" id="logout">Logout (${loggedInUser})</a>
+                `;
+            } else {
+                loginMenu.innerHTML = `<a href="#" id="openLogin">Login</a>`;
+            }
+        }
+
+        // Update login menu on page load
+        updateLoginMenu();
+
+        // Open login modal
+        document.getElementById('openLogin')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'block';
         });
+
+        // Close login modal
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple check (for demo purposes)
+            if (username && password) {
+                localStorage.setItem('loggedInUser', username);  // Store user info in LocalStorage
+                loggedInUser = username;
+                loginModal.style.display = 'none';  // Close modal
+                updateLoginMenu();  // Update login menu
+                alert(`Welcome, ${username}!`);
+            } else {
+                alert('Please enter valid login details.');
+            }
+        });
+
+        // Handle logout
+        document.getElementById('loginMenu').addEventListener('click', (e) => {
+            if (e.target.id === 'logout') {
+                e.preventDefault();
+                localStorage.removeItem('loggedInUser');  // Clear user info
+                loggedInUser = null;
+                updateLoginMenu();  // Update menu after logout
+                alert('You have logged out successfully.');
+            }
+        });
+
+        // Close modal if clicking outside of it
+        window.onclick = function(event) {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        };
     </script>
+
+    <!-- Modal CSS -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+        }
+
+        .close {
+            color: red;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+    </style>
 </body>
 </html>
