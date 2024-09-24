@@ -79,16 +79,16 @@
             bookings.push(bookingEntry);
             localStorage.setItem('bookings', JSON.stringify(bookings));
 
-            // Generate the ticket as a text file
-            generateTicket(bookingEntry);
+            // Show the ticket in an alert
+            showTicket(bookingEntry);
 
             // Reset form after submission
             bookingForm.reset();
         });
 
-        // Function to generate and download ticket as a text file
-        function generateTicket(booking) {
-            const ticketContent = `
+        // Function to display the ticket as an alert
+        function showTicket(booking) {
+            const ticketMessage = `
 Laurel Airways Flight Ticket
 ----------------------------
 Name: ${booking.name}
@@ -100,22 +100,7 @@ Passengers: ${booking.passengers}
 
 Thank you for booking with Laurel Airways. Have a safe journey!
             `;
-
-            // Create a blob from the text content
-            const blob = new Blob([ticketContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-
-            // Create a temporary download link
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `LaurelAirways_Ticket_${booking.from}_to_${booking.to}.txt`;
-            document.body.appendChild(link);
-
-            // Automatically trigger the download
-            link.click();
-
-            // Clean up
-            document.body.removeChild(link);
+            alert(ticketMessage);  // Display ticket in an alert box
         }
     </script>
 </body>
