@@ -49,6 +49,42 @@
             background-color: #0056b3; /* Darker blue on hover */
         }
 
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            color: #000;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         footer {
             padding: 10px; /* Reduced padding */
             font-size: 0.9em; /* Reduced font size */
@@ -56,6 +92,17 @@
             background-color: rgba(0, 0, 0, 0.7); /* Consistent theme */
             position: relative;
             width: 100%;
+        }
+
+        nav ul li a {
+            padding: 10px 15px; /* Added padding */
+            color: #fff; /* White text */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3; /* Add background hover effect */
         }
     </style>
 </head>
@@ -76,7 +123,7 @@
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content animated-modal">
+        <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Login</h2>
             <form id="loginForm">
@@ -95,7 +142,9 @@
         <a href="book-flight.html" class="btn book-flight-btn">Book Flights</a> <!-- Book Flights Button -->
     </section>
 
-   
+    <footer>
+        <p>&copy; 2024 12A COE. All rights reserved.</p>
+    </footer>
 
     <script>
         // Get elements
@@ -122,12 +171,10 @@
         document.getElementById('openLogin')?.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.style.display = 'block';
-            loginModal.classList.add('fade-in');  // Add fade-in effect
         });
 
         // Close login modal
         closeModal.addEventListener('click', () => {
-            loginModal.classList.remove('fade-in');  // Remove fade-in effect
             loginModal.style.display = 'none';
         });
 
