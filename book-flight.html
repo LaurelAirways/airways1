@@ -26,6 +26,10 @@
         <h2>Book Your Flight</h2>
         <form id="booking-form">
             <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
                 <label for="from">From:</label>
                 <input type="text" id="from" name="from" placeholder="Departure city" required>
             </div>
@@ -61,8 +65,9 @@
             event.preventDefault();
             const formData = new FormData(bookingForm);
 
-            // Create booking entry
+            // Create booking entry with user name
             const bookingEntry = {
+                name: formData.get('name'),
                 from: formData.get('from'),
                 to: formData.get('to'),
                 departureDate: formData.get('departure-date'),
@@ -86,6 +91,7 @@
             const ticketContent = `
 Laurel Airways Flight Ticket
 ----------------------------
+Name: ${booking.name}
 From: ${booking.from}
 To: ${booking.to}
 Departure Date: ${booking.departureDate}
