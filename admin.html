@@ -5,11 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View Bookings</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #00254d;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: white;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+
+        .admin-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00254d;
+        }
+
+        #entries {
+            margin-bottom: 20px;
+        }
+
+        #entries ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #entries li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #entries .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #entries .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        #download-csv {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #download-csv:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #00254d;
+            color: white;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
-<audio autoplay loop>
-    <source src="https://open.spotify.com/track/1tcWDBYQbJZVixZzsBWB0P?si=96caaa114f2c48f8" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 <body>
     <header>
         <div class="logo">
@@ -29,11 +145,11 @@
     <section class="admin-section">
         <h2>View Bookings</h2>
         <div id="entries"></div>
-        <button id="download-csv" class="btn">Download Bookings</button>
+        <button id="download-csv">Download Bookings</button>
     </section>
 
     <footer>
-        <p>&copy; 2024 12A COE. All rights reserved.</p>
+        <p>&copy; 2024 Laurel Airways. All rights reserved.</p>
     </footer>
 
     <script>
@@ -49,7 +165,9 @@
             entriesDiv.innerHTML = '<h4>Bookings:</h4><ul>' +
                 bookings.map((booking, index) => `
                     <li>
-                        ${booking.name}: ${booking.from} to ${booking.to} on ${booking.departureDate} (${booking.passengers} passengers) 
+                        <div>
+                            ${booking.name}: ${booking.from} to ${booking.to} on ${booking.departureDate} (${booking.passengers} passengers) 
+                        </div>
                         <button class="delete-btn" data-index="${index}">Delete</button>
                     </li>`).join('') +
                 '</ul>';
