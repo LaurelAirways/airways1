@@ -50,7 +50,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 12A COE . All rights reserved.</p>
+        <p>&copy; 2024 12A COE. All rights reserved.</p>
     </footer>
 
     <script>
@@ -60,17 +60,57 @@
         bookingForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(bookingForm);
+
+            // Create booking entry
             const bookingEntry = {
                 from: formData.get('from'),
                 to: formData.get('to'),
                 departureDate: formData.get('departure-date'),
-                returnDate: formData.get('return-date'),
+                returnDate: formData.get('return-date') || 'N/A',
                 passengers: formData.get('passengers')
             };
+
+            // Save booking to local storage
             bookings.push(bookingEntry);
             localStorage.setItem('bookings', JSON.stringify(bookings));
+
+            // Generate the ticket as a text file
+            generateTicket(bookingEntry);
+
+            // Reset form after submission
             bookingForm.reset();
         });
+
+        // Function to generate and download ticket as a text file
+        function generateTicket(booking) {
+            const ticketContent = `
+Laurel Airways Flight Ticket
+----------------------------
+From: ${booking.from}
+To: ${booking.to}
+Departure Date: ${booking.departureDate}
+Return Date: ${booking.returnDate}
+Passengers: ${booking.passengers}
+
+Thank you for booking with Laurel Airways. Have a safe journey!
+            `;
+
+            // Create a blob from the text content
+            const blob = new Blob([ticketContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary download link
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `LaurelAirways_Ticket_${booking.from}_to_${booking.to}.txt`;
+            document.body.appendChild(link);
+
+            // Automatically trigger the download
+            link.click();
+
+            // Clean up
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
