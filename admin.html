@@ -153,6 +153,23 @@
     </footer>
 
     <script>
+        // Check if user is logged in with the correct credentials
+        const loggedInUser = localStorage.getItem('loggedInUser');
+
+        // Define the allowed user credentials
+        const allowedUsername = "HRAP";
+
+        // Function to check access
+        function checkAccess() {
+            if (loggedInUser !== allowedUsername) {
+                alert("Access denied. You do not have permission to view this page.");
+                window.location.href = "index.html"; // Redirect to homepage
+            }
+        }
+
+        // Call the checkAccess function
+        checkAccess();
+
         function displayBookings() {
             const entriesDiv = document.getElementById('entries');
             const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
