@@ -14,6 +14,67 @@
             color: #fff;
         }
 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #00254d;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        /* Common style for all navigation links */
+        nav ul li a {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Hover effect for all nav links */
+        nav ul li a:hover {
+            background-color: #0056b3; /* Change background on hover */
+            color: #ffd700; /* Change text color on hover */
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+        /* Adding animation for hover underline */
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            background-color: #ffd700;
+            transition: all 0.4s ease;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
         .main-content {
             display: flex;
             flex-direction: column;
@@ -33,6 +94,7 @@
             font-size: 1.2em;
         }
 
+        /* Book flight button */
         .book-flight-btn {
             padding: 15px 30px;
             font-size: 1.5em;
@@ -49,7 +111,7 @@
         /* Button hover effect */
         .book-flight-btn:hover {
             background-color: #0056b3;
-            transform: scale(1.1); /* Slight zoom on hover */
+            transform: scale(0.8); /* Slight zoom on hover */
         }
 
         /* Keyframe animation for hover effect */
@@ -76,30 +138,6 @@
 
         .book-flight-btn:hover:after {
             animation: slideEffect 0.5s forwards;
-        }
-
-        nav ul li a {
-            padding: 10px 15px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #ffd700; /* Gold hover effect for the links */
-        }
-
-        /* Animation for the login/logout menu item */
-        nav ul li a.animated-link {
-            display: inline-block;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        nav ul li a.animated-link:hover {
-            transform: translateY(-5px); /* Bounce effect on hover */
-            color: #ffd700;
         }
 
         /* Modal styling */
@@ -192,7 +230,9 @@
         <a href="book-flight.html" class="btn book-flight-btn">Book Flights</a>
     </section>
 
-  
+    <footer>
+        <p>&copy; 2024 12A COE. All rights reserved.</p>
+    </footer>
 
     <script>
         const loginModal = document.getElementById('loginModal');
