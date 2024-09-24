@@ -11,13 +11,6 @@ body {
     background-color: #f4f4f4;
 }
 /* Body Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    background: url('https://cdn.prod.website-files.com/646a6ec3f634076bc7bf77f2/6504732212478432515994c0_united-airplane-desktop.jpeg') no-repeat center center/cover;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
 
 /* Additional styling for the rest of the site */
 header {
