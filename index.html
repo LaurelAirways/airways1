@@ -267,7 +267,7 @@
         const closeModal = document.querySelector('.close');
         const loginMenu = document.getElementById('loginMenu');
         const loginForm = document.getElementById('loginForm');
-        
+
         let loggedInUser = localStorage.getItem('loggedInUser');
 
         function updateLoginMenu() {
@@ -305,6 +305,15 @@
                 loggedInUser = username;
                 updateLoginMenu();
                 closeModal.click();
+            }
+        });
+
+        // Logout functionality
+        loginMenu.addEventListener('click', (e) => {
+            if (e.target.id === 'logout') {
+                localStorage.removeItem('loggedInUser');
+                loggedInUser = null;
+                updateLoginMenu();
             }
         });
 
