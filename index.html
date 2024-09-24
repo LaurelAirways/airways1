@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laurel Airways</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="" alt="Laurel Airways Logo" class="logo-img">
-            <h1>Laurel Airways</h1>
-        </div>
+        <h1 class="site-title">Laurel Airways</h1>
         <nav>
-            <ul>
+            <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="book-flight.html">Book Flight</a></li>
                 <li><a href="about.html">About Us</a></li>
@@ -26,7 +24,7 @@
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content animated-modal">
             <span class="close">&times;</span>
             <h2>Login</h2>
             <form id="loginForm">
@@ -60,11 +58,9 @@
 
         function updateLoginMenu() {
             if (loggedInUser) {
-                loginMenu.innerHTML = `
-                    <a href="#" id="logout">Logout (${loggedInUser})</a>
-                `;
+                loginMenu.innerHTML = `<a href="#" id="logout" class="animated-link">Logout (${loggedInUser})</a>`;
             } else {
-                loginMenu.innerHTML = `<a href="#" id="openLogin">Login</a>`;
+                loginMenu.innerHTML = `<a href="#" id="openLogin" class="animated-link">Login</a>`;
             }
         }
 
@@ -75,10 +71,12 @@
         document.getElementById('openLogin')?.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.style.display = 'block';
+            loginModal.classList.add('fade-in');  // Add fade-in effect
         });
 
         // Close login modal
         closeModal.addEventListener('click', () => {
+            loginModal.classList.remove('fade-in');  // Remove fade-in effect
             loginModal.style.display = 'none';
         });
 
@@ -119,8 +117,50 @@
         };
     </script>
 
-    <!-- Modal CSS -->
+    <!-- Animations and Modal Styling -->
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #004c8c;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .site-title {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: #ffcc00;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -140,6 +180,7 @@
             border: 1px solid #888;
             width: 300px;
             text-align: center;
+            animation: slide-down 0.5s ease; /* Slide down animation */
         }
 
         .close {
@@ -153,6 +194,66 @@
         .close:focus {
             color: black;
             cursor: pointer;
+        }
+
+        .btn {
+            background-color: #004c8c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #003366;
+        }
+
+        /* Animations */
+        @keyframes slide-down {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fade-in 0.5s ease;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animated-link {
+            position: relative;
+        }
+
+        .animated-link::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ffcc00;
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .animated-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
     </style>
 </body>
