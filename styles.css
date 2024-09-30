@@ -6,33 +6,122 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Body Styling */
 body {
     color: #333;
-    background: url('https://wallpapers.com/images/featured/aeroplane-q98atcz0voqbdkv1.jpg') no-repeat center center/cover;
-    background-size: cover;
+    background-color: #f4f4f4;
 }
+/* Body Styling */
 
-/* Header Styling */
+/* Additional styling for the rest of the site */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: rgba(0, 76, 140, 0.85);
     padding: 20px;
-    background-color: rgba(0, 76, 140, 0.85); /* Slightly transparent for a modern look */
+    color: white;
+    text-align: center;
 }
 
 .site-title {
     font-size: 2.5em;
     margin: 0;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav-menu li {
+    margin: 0 15px;
+}
+
+.nav-menu li a {
     color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-menu li a:hover {
+    color: #ffcc00;
+}
+
+.main-content {
+    text-align: center;
+    color: white;
+    padding: 80px 20px;
+}
+
+.book-flight-btn {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #004c8c;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.book-flight-btn:hover {
+    background-color: #003366;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #004c8c;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #003366;
+    color: white;
+}
+
+/* Animations */
+.animated-section {
+    animation: fade-in 1.5s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add hover effects for buttons */
+.btn {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #003366;
+}
+
+
+header h1 {
+    font-size: 1.8rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
 }
 
 nav ul li {
@@ -40,150 +129,176 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #ffcc00;
+    color: #ff6600;
 }
 
-/* Main Content Styles */
-.main-content {
+/* Hero Section */
+.hero {
+    background: url('https://wallpapers.com/images/featured/aeroplane-q98atcz0voqbdkv1.jpg') no-repeat center center/cover;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: calc(100vh - 80px); /* Adjust for header height */
+    align-items: center;
     text-align: center;
     color: white;
 }
 
-h2 {
-    margin: 20px 0;
-    font-size: 2.5rem;
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
 }
 
-p {
+.hero-content p {
     font-size: 1.5rem;
     margin-bottom: 30px;
 }
 
-/* Button Styles */
-.book-flight-btn {
-    display: inline-block;
-    background-color: #ffcc00;
-    color: #004c8c;
-    padding: 15px 30px;
-    font-size: 1.5em;
-    text-decoration: none;
+.hero .btn {
+    padding: 10px 25px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
 }
 
-.book-flight-btn:hover {
+.hero .btn:hover {
+    background-color: #cc5200;
+}
+
+/* Booking Form */
+.booking-section {
+    padding: 60px;
+    background-color: white;
+}
+
+.booking-section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.booking-section .btn {
+    width: 100%;
+    padding: 12px;
     background-color: #003366;
     color: white;
-    transform: scale(1.05);
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    color: #000;
-    margin: 15% auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    width: 300px;
-    text-align: left;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
+.booking-section .btn:hover {
+    background-color: #ff6600;
+}
+
+/* About and Contact Section */
+.about-section, .contact-section {
+    padding: 60px;
+    background-color: white;
+    text-align: center;
+}
+
+.about-section h2, .contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contact-section a {
+    color: #003366;
     text-decoration: none;
 }
 
-/* Ticket Styles */
+footer {
+    padding: 20px;
+    background-color: #003366;
+    color: white;
+    text-align: center;
+}
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Ticket Section Styles */
 .tickets-section {
     padding: 40px;
+    background-color: #f4f4f4; /* Light background for contrast */
     text-align: center;
-    background-color: #f4f4f4;
 }
 
 .ticket {
-    border: 2px solid #004c8c;
+    border: 2px solid #004c8c; /* Ticket border color */
     border-radius: 10px;
     padding: 20px;
-    margin: 10px auto;
-    width: 300px;
-    background-color: #fff;
-    text-align: left;
+    margin: 10px auto; /* Centering tickets */
+    width: 300px; /* Fixed width for consistency */
+    background-color: #fff; /* White background for tickets */
+    text-align: left; /* Align text to the left */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.ticket:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 .ticket-header {
-    background-color: #004c8c;
-    color: white;
+    background-color: #004c8c; /* Header background color */
+    color: white; /* Header text color */
     padding: 10px;
     text-align: center;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0; /* Rounded corners on the top */
 }
 
 .ticket-details p {
-    margin: 10px 0;
+    margin: 10px 0; /* Spacing between paragraphs */
 }
 
 .ticket-details strong {
-    color: #004c8c;
-}
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: rgba(0, 76, 140, 0.85);
-    color: white;
-    position: relative;
-    width: 100%;
+    color: #004c8c; /* Emphasized text color */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .main-content {
-        height: auto; /* Allow content to grow */
-        padding: 20px;
+    .tickets-section {
+        padding: 20px; /* Adjust padding for smaller screens */
     }
 
-    h2 {
-        font-size: 2rem;
-    }
-
-    .book-flight-btn {
-        font-size: 1.2em;
-        padding: 10px 20px;
+    .ticket {
+        width: 90%; /* Full width on small screens */
+        margin: 10px auto; /* Center tickets */
     }
 }
