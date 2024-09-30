@@ -6,10 +6,6 @@
     <title>Book Flight</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-     <audio autoplay loop>
-    <source src="https://open.spotify.com/track/1tcWDBYQbJZVixZzsBWB0P?si=96caaa114f2c48f8" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 <body>
     <header>
         <div class="logo">
@@ -58,7 +54,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 12A COE. All rights reserved.</p>
+        <p>&copy; 2024 Laurel Airways. All rights reserved.</p>
     </footer>
 
     <script>
@@ -69,7 +65,7 @@
             event.preventDefault();
             const formData = new FormData(bookingForm);
 
-            // Create booking entry with user name
+            // Create booking entry
             const bookingEntry = {
                 name: formData.get('name'),
                 from: formData.get('from'),
@@ -83,29 +79,9 @@
             bookings.push(bookingEntry);
             localStorage.setItem('bookings', JSON.stringify(bookings));
 
-            // Show the ticket in an alert
-            showTicket(bookingEntry);
-
-            // Reset form after submission
-            bookingForm.reset();
+            // Redirect to index.html
+            window.location.href = 'index.html';
         });
-
-        // Function to display the ticket as an alert
-        function showTicket(booking) {
-            const ticketMessage = `
-Laurel Airways Flight Ticket
-----------------------------
-Name: ${booking.name}
-From: ${booking.from}
-To: ${booking.to}
-Departure Date: ${booking.departureDate}
-Return Date: ${booking.returnDate}
-Passengers: ${booking.passengers}
-
-Thank you for booking with Laurel Airways. Have a safe journey!
-            `;
-            alert(ticketMessage);  // Display ticket in an alert box
-        }
     </script>
 </body>
 </html>
