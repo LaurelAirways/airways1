@@ -92,6 +92,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            display: none; /* Initially hide delete buttons */
         }
 
         #entries .delete-btn:hover {
@@ -124,6 +125,34 @@
             width: 100%;
             bottom: 0;
         }
+
+        .login-form {
+            display: none; /* Initially hidden */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-form input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -146,6 +175,14 @@
         <h2>View Bookings</h2>
         <div id="entries"></div>
         <button id="download-csv">Download Bookings</button>
+
+        <!-- Admin Login Form -->
+        <div class="login-form" id="loginForm">
+            <h4>Admin Login</h4>
+            <input type="text" id="adminUsername" placeholder="Username" required>
+            <input type="password" id="adminPassword" placeholder="Password" required>
+            <button id="adminLoginBtn">Login</button>
+        </div>
     </section>
 
     <footer>
@@ -153,23 +190,6 @@
     </footer>
 
     <script>
-        // Check if user is logged in with the correct credentials
-        const loggedInUser = localStorage.getItem('loggedInUser');
-
-        // Define the allowed user credentials
-        const allowedUsername = "HRAP";
-
-        // Function to check access
-        function checkAccess() {
-            if (loggedInUser !== allowedUsername) {
-                alert("Access denied. You do not have permission to view this page.");
-                window.location.href = "index.html"; // Redirect to homepage
-            }
-        }
-
-        // Call the checkAccess function
-        checkAccess();
-
         function displayBookings() {
             const entriesDiv = document.getElementById('entries');
             const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
@@ -178,7 +198,7 @@
                 return;
             }
 
-            // Display bookings with Name field and Delete button
+            // Display bookings
             entriesDiv.innerHTML = '<h4>Bookings:</h4><ul>' +
                 bookings.map((booking, index) => `
                     <li>
@@ -205,6 +225,7 @@
             displayBookings(); // Refresh the displayed bookings
         }
 
+        // Display bookings on page load
         displayBookings();
 
         // Download bookings as CSV
@@ -222,6 +243,29 @@
             link.click();
             document.body.removeChild(link);
         });
+
+        // Admin Login Logic
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminForm = document.getElementById('loginForm');
+
+        adminLoginBtn.addEventListener('click', () => {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (username === 'HRAP' && password === '69') {
+                alert('Admin logged in successfully!');
+                adminForm.style.display = 'none'; // Hide the login form
+                // Show delete buttons
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.style.display = 'block';
+                });
+            } else {
+                alert('Incorrect username or password.');
+            }
+        });
+
+        // Show login form on page load if not already logged in
+        adminForm.style.display = 'block';
     </script>
 </body>
 </html>
