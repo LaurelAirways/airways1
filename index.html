@@ -133,6 +133,90 @@
             animation: slideEffect 0.5s forwards;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            color: #000;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: left;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            color: #007BFF;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: rgba(0, 86, 179, 1);
+        }
+
         footer {
             padding: 10px;
             font-size: 0.9em;
@@ -191,6 +275,20 @@
         </nav>
     </header>
 
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+
     <section class="main-content">
         <h2>Welcome to Laurel Airways</h2>
         <p>Experience world-class travel with seamless flight booking, luxurious comfort, and exceptional service.</p>
@@ -200,7 +298,18 @@
     <section class="tickets-section">
         <h2>My Tickets</h2>
         <div id="ticketsList">
-            <!-- Tickets will be dynamically generated here -->
+            <!-- Example Ticket -->
+            <div class="ticket">
+                <div class="ticket-header">Flight Details</div>
+                <div class="ticket-details">
+                    <p><strong>From:</strong> New York</p>
+                    <p><strong>To:</strong> Los Angeles</p>
+                    <p><strong>Departure:</strong> 2024-09-30</p>
+                    <p><strong>Return:</strong> 2024-10-07</p>
+                    <p><strong>Passenger Name:</strong> John Doe</p>
+                </div>
+            </div>
+            <!-- More tickets will be dynamically generated here -->
         </div>
     </section>
 
@@ -209,32 +318,32 @@
     </footer>
 
     <script>
+        const loginModal = document.getElementById("loginModal");
         const loginMenu = document.getElementById("loginMenu");
+        const closeModal = document.getElementsByClassName("close")[0];
+
         loginMenu.innerHTML = '<a href="#" id="loginLink">Login</a>';
 
         document.getElementById("loginLink").onclick = function() {
             loginModal.style.display = "flex";
         }
 
-        const ticketsList = document.getElementById('ticketsList');
-        const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        closeModal.onclick = function() {
+            loginModal.style.display = "none";
+        }
 
-        bookings.forEach(booking => {
-            const ticketDiv = document.createElement('div');
-            ticketDiv.classList.add('ticket');
-            ticketDiv.innerHTML = `
-                <div class="ticket-header">Flight Details</div>
-                <div class="ticket-details">
-                    <p><strong>Name:</strong> ${booking.name}</p>
-                    <p><strong>From:</strong> ${booking.from}</p>
-                    <p><strong>To:</strong> ${booking.to}</p>
-                    <p><strong>Departure:</strong> ${booking.departureDate}</p>
-                    <p><strong>Return:</strong> ${booking.returnDate}</p>
-                    <p><strong>Passengers:</strong> ${booking.passengers}</p>
-                </div>
-            `;
-            ticketsList.appendChild(ticketDiv);
-        });
+        window.onclick = function(event) {
+            if (event.target === loginModal) {
+                loginModal.style.display = "none";
+            }
+        }
+
+        document.getElementById("loginForm").onsubmit = function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            loginMenu.innerHTML = `<a href="#">Welcome, ${username}</a>`;
+            loginModal.style.display = "none";
+        }
     </script>
 </body>
 </html>
