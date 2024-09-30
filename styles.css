@@ -1,21 +1,29 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background: url('https://wallpapers.com/images/featured/aeroplane-q98atcz0voqbdkv1.jpg') no-repeat center center/cover;
+/* Global styles */
+* {
     margin: 0;
     padding: 0;
-    color: #fff;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Body Styling */
+body {
+    color: #333;
+    background: url('https://wallpapers.com/images/featured/aeroplane-q98atcz0voqbdkv1.jpg') no-repeat center center/cover;
+    background-size: cover;
+}
+
+/* Header Styling */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #00254d;
+    background-color: rgba(0, 76, 140, 0.85); /* Slightly transparent for a modern look */
 }
 
-h1 {
-    font-size: 2em;
+.site-title {
+    font-size: 2.5em;
     margin: 0;
     color: white;
 }
@@ -32,99 +40,56 @@ nav ul li {
 }
 
 nav ul li a {
-    padding: 10px 20px;
-    color: #fff;
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2em;
-    position: relative;
-    display: inline-block;
-    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: rgba(0, 86, 179, 1);
-    color: #ffd700;
-    transform: scale(1.1);
+    color: #ffcc00;
 }
 
-nav ul li a::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background-color: #ffd700;
-    transition: all 0.4s ease;
-}
-
-nav ul li a:hover::before {
-    width: 100%;
-    left: 0;
-}
-
+/* Main Content Styles */
 .main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: calc(100vh - 80px); /* Adjust for header height */
     text-align: center;
-    padding: 20px;
+    color: white;
 }
 
 h2 {
-    margin: 0 0 20px;
+    margin: 20px 0;
+    font-size: 2.5rem;
 }
 
 p {
-    margin: 0 0 40px;
-    font-size: 1.2em;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
 }
 
+/* Button Styles */
 .book-flight-btn {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #004c8c;
     padding: 15px 30px;
     font-size: 1.5em;
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .book-flight-btn:hover {
-    background-color: rgba(0, 86, 179, 1);
-    transform: scale(1.1);
+    background-color: #003366;
+    color: white;
+    transform: scale(1.05);
 }
 
-@keyframes slideEffect {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
-}
-
-.book-flight-btn:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: white;
-    left: -100%;
-    bottom: 0;
-    transition: all 0.3s ease;
-}
-
-.book-flight-btn:hover:after {
-    animation: slideEffect 0.5s forwards;
-}
-
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -147,14 +112,6 @@ p {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     width: 300px;
     text-align: left;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.3s ease;
-}
-
-.modal.show .modal-content {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .close {
@@ -169,53 +126,6 @@ p {
 .close:focus {
     color: black;
     text-decoration: none;
-}
-
-.modal-content h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 1.5em;
-    color: #007BFF;
-}
-
-.modal-content label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.modal-content input[type="text"],
-.modal-content input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.modal-content button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.modal-content button:hover {
-    background-color: rgba(0, 86, 179, 1);
-}
-
-footer {
-    padding: 10px;
-    font-size: 0.9em;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 1);
-    position: relative;
-    width: 100%;
 }
 
 /* Ticket Styles */
@@ -249,4 +159,31 @@ footer {
 
 .ticket-details strong {
     color: #004c8c;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 76, 140, 0.85);
+    color: white;
+    position: relative;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        height: auto; /* Allow content to grow */
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .book-flight-btn {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
 }
