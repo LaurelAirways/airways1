@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Flight</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .booking-message {
+            display: none; /* Initially hidden */
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #28a745; /* Success green color */
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -51,6 +62,8 @@
             </div>
             <button type="submit" class="btn">Book Flights</button>
         </form>
+
+        <div id="bookingMessage" class="booking-message">Your ticket has been booked successfully!</div>
     </section>
 
     <footer>
@@ -59,6 +72,7 @@
 
     <script>
         const bookingForm = document.getElementById('booking-form');
+        const bookingMessage = document.getElementById('bookingMessage');
         let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
 
         bookingForm.addEventListener('submit', (event) => {
@@ -79,8 +93,11 @@
             bookings.push(bookingEntry);
             localStorage.setItem('bookings', JSON.stringify(bookings));
 
-            // Redirect to index.html
-            window.location.href = 'index.html';
+            // Show the booking confirmation message
+            bookingMessage.style.display = 'block';
+
+            // Optionally, clear the form fields after booking
+            bookingForm.reset();
         });
     </script>
 </body>
