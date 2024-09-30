@@ -262,37 +262,69 @@
         <a href="book-flight.html" class="btn book-flight-btn">Book Flights</a>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Laurel Airways. All rights reserved.</p>
-    </footer>
-
     <script>
-        const loginModal = document.getElementById("loginModal");
-        const loginMenu = document.getElementById("loginMenu");
-        const closeModal = document.getElementsByClassName("close")[0];
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.querySelector('.close');
+        const loginMenu = document.getElementById('loginMenu');
+        const loginForm = document.getElementById('loginForm');
 
-        loginMenu.innerHTML = '<a href="#" id="loginLink">Login</a>';
+        let loggedInUser = localStorage.getItem('loggedInUser');
 
-        document.getElementById("loginLink").onclick = function() {
-            loginModal.style.display = "flex";
-        }
-
-        closeModal.onclick = function() {
-            loginModal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target === loginModal) {
-                loginModal.style.display = "none";
+        function updateLoginMenu() {
+            if (loggedInUser) {
+                loginMenu.innerHTML = `<a href="#" id="logout" class="animated-link">Logout (${loggedInUser})</a>`;
+            } else {
+                loginMenu.innerHTML = `<a href="#" id="openLogin" class="animated-link">Login</a>`;
             }
         }
 
-        document.getElementById("loginForm").onsubmit = function(event) {
-            event.preventDefault();
-            const username = document.getElementById("username").value;
-            loginMenu.innerHTML = `<a href="#">Welcome, ${username}</a>`;
-            loginModal.style.display = "none";
+        updateLoginMenu();
+
+        // Open Login Modal
+        loginMenu.addEventListener('click', (e) => {
+            if (e.target.id === 'openLogin') {
+                e.preventDefault();
+                loginModal.style.display = 'flex';
+                setTimeout(() => {
+                    loginModal.classList.add('show');
+                }, 10);
+            } else if (e.target.id === 'logout') {
+                // Logout functionality
+                localStorage.removeItem('loggedInUser');
+                loggedInUser = null;
+                updateLoginMenu();
+            }
+        });
+
+        closeModal.addEventListener('click', () => {
+            loginModal.classList.remove('show');
+            setTimeout(() => {
+                loginModal.style.display = 'none';
+            }, 300);
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // Add your authentication logic here (this is just a placeholder)
+            if (username && password) {
+                localStorage.setItem('loggedInUser', username);
+                loggedInUser = username;
+                updateLoginMenu();
+                closeModal.click();
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target === loginModal) {
+                closeModal.click();
+            }
         }
     </script>
+
+    <footer>
+        <p>&copy; 2024 Laurel Airways. All rights reserved.</p>
+    </footer>
 </body>
 </html>
