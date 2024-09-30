@@ -62,8 +62,6 @@
             </div>
             <button type="submit" class="btn">Book Flights</button>
         </form>
-
-        <div id="bookingMessage" class="booking-message"></div> <!-- Initially hidden -->
     </section>
 
     <footer>
@@ -72,14 +70,13 @@
 
     <script>
         const bookingForm = document.getElementById('booking-form');
-        const bookingMessage = document.getElementById('bookingMessage');
         let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
 
         bookingForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData = new FormData(bookingForm);
 
-            // Create booking entry
+            // Create booking entry with user name
             const bookingEntry = {
                 name: formData.get('name'),
                 from: formData.get('from'),
@@ -93,18 +90,29 @@
             bookings.push(bookingEntry);
             localStorage.setItem('bookings', JSON.stringify(bookings));
 
-            // Show the booking confirmation message
-            bookingMessage.innerHTML = `Your ticket has been booked successfully!<br>
-                From: ${bookingEntry.from}<br>
-                To: ${bookingEntry.to}<br>
-                Departure: ${bookingEntry.departureDate}<br>
-                Return: ${bookingEntry.returnDate}<br>
-                Passengers: ${bookingEntry.passengers}`;
-            bookingMessage.style.display = 'block';
+            // Show the ticket in an alert
+            showTicket(bookingEntry);
 
-            // Optionally, clear the form fields after booking
+            // Reset form after submission
             bookingForm.reset();
         });
+
+        // Function to display the ticket as an alert
+        function showTicket(booking) {
+            const ticketMessage = `
+Laurel Airways Flight Ticket
+----------------------------
+Name: ${booking.name}
+From: ${booking.from}
+To: ${booking.to}
+Departure Date: ${booking.departureDate}
+Return Date: ${booking.returnDate}
+Passengers: ${booking.passengers}
+
+Thank you for booking with Laurel Airways. Have a safe journey!
+            `;
+            alert(ticketMessage);  // Display ticket in an alert box
+        }
     </script>
 </body>
 </html>
