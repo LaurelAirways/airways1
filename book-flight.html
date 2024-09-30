@@ -63,7 +63,7 @@
             <button type="submit" class="btn">Book Flights</button>
         </form>
 
-        <div id="bookingMessage" class="booking-message">Your ticket has been booked successfully!</div>
+        <div id="bookingMessage" class="booking-message"></div> <!-- Initially hidden -->
     </section>
 
     <footer>
@@ -85,7 +85,7 @@
                 from: formData.get('from'),
                 to: formData.get('to'),
                 departureDate: formData.get('departure-date'),
-                returnDate: formData.get('return-date') || 'N/A',
+                returnDate: formData.get('return-date') || 'One-way',
                 passengers: formData.get('passengers')
             };
 
@@ -94,6 +94,12 @@
             localStorage.setItem('bookings', JSON.stringify(bookings));
 
             // Show the booking confirmation message
+            bookingMessage.innerHTML = `Your ticket has been booked successfully!<br>
+                From: ${bookingEntry.from}<br>
+                To: ${bookingEntry.to}<br>
+                Departure: ${bookingEntry.departureDate}<br>
+                Return: ${bookingEntry.returnDate}<br>
+                Passengers: ${bookingEntry.passengers}`;
             bookingMessage.style.display = 'block';
 
             // Optionally, clear the form fields after booking
